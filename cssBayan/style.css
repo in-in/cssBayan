@@ -1,0 +1,78 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--color_light: #f2f2f2;
+	--color_dark: #333;
+	--color_accent: #1971c2;
+}
+
+body {
+	background-color: var(--color_light);
+	color: var(--color_dark);
+	font-family: sans-serif;
+	padding: 2em;
+}
+
+h1 {
+	line-height: 2;
+}
+
+.accordion {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.accordion_input {
+	display: none;
+}
+
+.accordion_input:not(checked) ~ .accordion_label .accordion_content {
+	display: none;
+}
+
+.accordion_input:checked ~ .accordion_label .accordion_content {
+	display: flex;
+}
+
+.accordion_input:checked ~ .accordion_label .accordion_title {
+	margin-bottom: 1em;
+	color: var(--color_accent);
+}
+
+.accordion_label {
+	background-color: var(--color_light);
+	padding-top: 1em;
+	padding-bottom: 1em;
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
+	border-top: 1px solid var(--color_dark);
+	background-repeat: no-repeat;
+	background-size: 1em;
+	background-position: right top 1.2em;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 416 416' fill='%23333333' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M240 32C240 14.3 225.7 0 208 0C190.3 0 176 14.3 176 32V176H32C14.3 176 0 190.3 0 208C0 225.7 14.3 240 32 240H176V384C176 401.7 190.3 416 208 416C225.7 416 240 401.7 240 384V240H384C401.7 240 416 225.7 416 208C416 190.3 401.7 176 384 176H240V32Z'/%3E%3C/svg%3E%0A");
+}
+
+.accordion_title {
+	font-size: 1.2em;
+	font-weight: bold;
+	line-height: 1.2;
+}
+
+.accordion_content {
+	justify-content: center;
+	align-items: center;
+}
+
+.accordion_img {
+	display: block;
+	max-width: 100%;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	/* keep */
+}
