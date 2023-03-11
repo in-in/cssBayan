@@ -4,9 +4,9 @@
 	--color_accent: #1971c2;
 	--base_transition: 0.4s ease-in-out;
 	--max_height: 22rem;
-	--icon_plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23333333' viewBox='0 0 448 512'%3E%3Cpath d='M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z'/%3E%3C/svg%3E");
-	--icon_close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23333333' viewBox='0 0 320 512'%3E%3Cpath d='M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z'/%3E%3C/svg%3E");
-	--icon_close_active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%231971c2' viewBox='0 0 320 512'%3E%3Cpath d='M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z'/%3E%3C/svg%3E");
+	--icon_plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='12' y1='5' x2='12' y2='19'%3E%3C/line%3E%3Cline x1='5' y1='12' x2='19' y2='12'%3E%3C/line%3E%3C/svg%3E");
+	--icon_close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+	--icon_close_active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%231971c2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
 }
 
 * {
@@ -19,11 +19,16 @@ body {
 	background-color: var(--color_light);
 	color: var(--color_dark);
 	font-family: sans-serif;
+	max-width: 1920px;
+	margin-right: auto;
+	margin-left: auto;
 	padding: 1em;
+	font-size: 1rem;
 }
 
 h1 {
 	line-height: 2;
+	font-size: 2em;
 }
 
 .accordion {
@@ -60,22 +65,25 @@ h1 {
 		transition: background-position var(--base_transition);
 	}
 
-	.accordion_label:hover {
+	.accordion_input:not(:checked) ~ .accordion_label:hover {
 		background-image: var(--icon_close);
+		animation: icon 0.4s;
 	}
 }
 
-:where(.accordion_input:checked ~ .accordion_label) {
+.accordion_input:checked ~ .accordion_label {
 	background-image: var(--icon_close);
+	animation: icon 0.4s;
 }
 
-.accordion_label:active {
+.accordion_input:not(:checked) ~ .accordion_label:active,
+.accordion_input ~ .accordion_label:active {
 	opacity: 0.7;
 	background-image: var(--icon_close_active);
 }
 
 .accordion_title {
-	font-size: 1.2em;
+	font-size: 0.875em;
 	font-weight: bold;
 	line-height: 1.2;
 	word-break: break-word;
@@ -127,4 +135,29 @@ h1 {
 	width: 100%;
 	max-height: var(--max_height);
 	object-fit: contain;
+}
+
+@media (min-width: 820px) {
+	body {
+		width: 70%;
+		font-size: 1.2rem;
+	}
+}
+
+@media (min-width: 1920px) {
+	body {
+		width: 50%;
+		font-size: 1.5rem;
+	}
+}
+
+
+@keyframes icon {
+	from {
+		background-position: right -10% top 1.2em;
+	}
+
+	to {
+		background-position: right 0 top 1.2em;
+	}
 }
