@@ -1,0 +1,163 @@
+:root {
+	--color_light: #f2f2f2;
+	--color_dark: #333;
+	--color_accent: #1971c2;
+	--base_transition: 0.4s ease-in-out;
+	--max_height: 22rem;
+	--icon_plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='12' y1='5' x2='12' y2='19'%3E%3C/line%3E%3Cline x1='5' y1='12' x2='19' y2='12'%3E%3C/line%3E%3C/svg%3E");
+	--icon_close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+	--icon_close_active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%231971c2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: var(--color_light);
+	color: var(--color_dark);
+	font-family: sans-serif;
+	max-width: 1920px;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 1em;
+	font-size: 1rem;
+}
+
+h1 {
+	line-height: 2;
+	font-size: 2em;
+}
+
+.accordion {
+	margin-right: auto;
+	margin-left: auto;
+	list-style: none;
+}
+
+.accordion_input {
+	display: none;
+}
+
+.accordion_label {
+	background-color: var(--color_light);
+	padding: 1em;
+	padding-left: 0;
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
+	border-top: 1px solid rgb(0 0 0 / 30%);
+	background-repeat: no-repeat;
+	background-size: 1em;
+	background-position: right top 1.2em;
+	background-image: var(--icon_plus);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.accordion_label {
+		background-position: right -10% top 1.2em;
+	}
+
+	.accordion:hover .accordion_label {
+		background-position: right 0 top 1.2em;
+		transition: background-position var(--base_transition);
+	}
+
+	.accordion_input:not(:checked) ~ .accordion_label:hover {
+		background-image: var(--icon_close);
+		animation: icon 0.4s;
+	}
+}
+
+.accordion_input:checked ~ .accordion_label {
+	background-image: var(--icon_close);
+	animation: icon 0.4s;
+}
+
+.accordion_input:not(:checked) ~ .accordion_label:active,
+.accordion_input ~ .accordion_label:active {
+	opacity: 0.7;
+	background-image: var(--icon_close_active);
+}
+
+.accordion_title {
+	font-size: 0.875em;
+	font-weight: bold;
+	line-height: 1.2;
+	word-break: break-word;
+	color: var(--color_accent);
+}
+
+.accordion_input:checked ~ * .accordion_title {
+	margin-bottom: 1em;
+	color: var(--color_dark);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.accordion:hover .accordion_title {
+		color: var(--color_dark);
+		transition: color var(--base_transition);
+	}
+
+	.accordion_label:hover .accordion_title {
+		margin-bottom: 1em;
+		color: var(--color_dark);
+	}
+}
+
+.accordion_label:active .accordion_title {
+	color: var(--color_accent);
+}
+
+.accordion_content {
+	justify-content: center;
+	align-items: center;
+	transition: max-height var(--base_transition);
+	display: flex;
+	overflow: hidden;
+	max-height: 0;
+}
+
+.accordion_input:checked ~ * .accordion_content {
+	max-height: var(--max_height);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.accordion_label:hover .accordion_content {
+		max-height: var(--max_height);
+	}
+}
+
+.accordion_img {
+	display: block;
+	width: 100%;
+	max-height: var(--max_height);
+	object-fit: contain;
+}
+
+@media (min-width: 820px) {
+	body {
+		width: 70%;
+		font-size: 1.2rem;
+	}
+}
+
+@media (min-width: 1920px) {
+	body {
+		width: 50%;
+		font-size: 1.5rem;
+	}
+}
+
+
+@keyframes icon {
+	from {
+		background-position: right -10% top 1.2em;
+	}
+
+	to {
+		background-position: right 0 top 1.2em;
+	}
+}
