@@ -8,13 +8,14 @@
 	--color_light: #f2f2f2;
 	--color_dark: #333;
 	--color_accent: #1971c2;
+	--base_transition: 0.2s ease-in-out;
 }
 
 body {
 	background-color: var(--color_light);
 	color: var(--color_dark);
 	font-family: sans-serif;
-	padding: 2em;
+	padding: 1em;
 }
 
 h1 {
@@ -40,17 +41,21 @@ h1 {
 
 .accordion_input:checked ~ .accordion_label .accordion_title {
 	margin-bottom: 1em;
-	color: var(--color_accent);
+	color: var(--color_dark);
+}
+
+.accordion_input:checked ~ .accordion_label {
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 314 314' fill='%23333333' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M55.1766 9.92179C42.6608 -2.594 22.4376 -2.594 9.92179 9.92179C-2.594 22.4376 -2.594 42.6608 9.92179 55.1766L111.745 157L9.92179 258.823C-2.594 271.339 -2.594 291.562 9.92179 304.078C22.4376 316.594 42.6608 316.594 55.1766 304.078L157 202.255L258.823 304.078C271.339 316.594 291.562 316.594 304.078 304.078C316.594 291.562 316.594 271.339 304.078 258.823L202.255 157L304.078 55.1766C316.594 42.6608 316.594 22.4376 304.078 9.92179C291.562 -2.594 271.339 -2.59401 258.823 9.92179L157 111.745L55.1766 9.92179Z' /%3E%3C/svg%3E%0A");
 }
 
 .accordion_label {
 	background-color: var(--color_light);
-	padding-top: 1em;
-	padding-bottom: 1em;
+	padding: 1em;
+	padding-left: 0;
 	display: flex;
 	flex-direction: column;
 	cursor: pointer;
-	border-top: 1px solid var(--color_dark);
+	border-top: 1px solid rgb(0 0 0 / 30%);
 	background-repeat: no-repeat;
 	background-size: 1em;
 	background-position: right top 1.2em;
@@ -61,6 +66,8 @@ h1 {
 	font-size: 1.2em;
 	font-weight: bold;
 	line-height: 1.2;
+	word-break: break-word;
+	color: var(--color_accent);
 }
 
 .accordion_content {
@@ -70,9 +77,36 @@ h1 {
 
 .accordion_img {
 	display: block;
-	max-width: 100%;
+	width: 100%;
+	/* max-width: 30rem; */
+	max-width: 10rem;
 }
 
 @media (hover: hover) and (pointer: fine) {
-	/* keep */
+	.accordion_label {
+		background-position: right -10% top 1.2em;
+	}
+
+	.accordion:hover .accordion_label {
+		background-position: right 0 top 1.2em;
+		transition: background-position var(--base_transition);
+	}
+
+	.accordion:hover .accordion_title {
+		color: var(--color_dark);
+		transition: color var(--base_transition);
+	}
+
+	.accordion_item:hover .accordion_label .accordion_content {
+		display: flex;
+	}
+
+	.accordion_item:hover .accordion_label .accordion_title {
+		margin-bottom: 1em;
+		color: var(--color_dark);
+	}
+
+	.accordion_item:hover .accordion_label {
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 314 314' fill='%23333333' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M55.1766 9.92179C42.6608 -2.594 22.4376 -2.594 9.92179 9.92179C-2.594 22.4376 -2.594 42.6608 9.92179 55.1766L111.745 157L9.92179 258.823C-2.594 271.339 -2.594 291.562 9.92179 304.078C22.4376 316.594 42.6608 316.594 55.1766 304.078L157 202.255L258.823 304.078C271.339 316.594 291.562 316.594 304.078 304.078C316.594 291.562 316.594 271.339 304.078 258.823L202.255 157L304.078 55.1766C316.594 42.6608 316.594 22.4376 304.078 9.92179C291.562 -2.594 271.339 -2.59401 258.823 9.92179L157 111.745L55.1766 9.92179Z' /%3E%3C/svg%3E%0A");
+	}
 }
